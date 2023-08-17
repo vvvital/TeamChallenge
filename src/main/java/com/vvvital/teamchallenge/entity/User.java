@@ -12,7 +12,7 @@ import java.util.List;
 public class User {
 
     @Id
-    private Long id;
+    private Integer id;
     @Email
     @NotBlank
     private String email;
@@ -32,14 +32,12 @@ public class User {
 
     private List<TypeOfService> typeOfServices;
 
-    public User(Long id, String mail, String name, String surname, String phone, String password) {
-        this.id = id;
+    public User(String mail, String name, String surname, String phone, String password) {
         this.email = mail;
         this.name = name;
         this.surName = surname;
         this.phone = phone;
         this.password = password;
-
     }
 
     public User() {
@@ -58,7 +56,7 @@ public class User {
     }
 
     //****GETTERS*****
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -91,7 +89,7 @@ public class User {
     }
 
     //********SETTERS*************
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
