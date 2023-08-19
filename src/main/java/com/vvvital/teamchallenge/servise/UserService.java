@@ -21,6 +21,10 @@ public class UserService {
         this.jdbcUserRepository = jdbcUserRepository;
     }
 
+    public void create (User user){
+        logger.info("/************UserService/create User****************/");
+        jdbcUserRepository.create(user);
+    }
     public User login(String login, String password){
         User user = jdbcUserRepository.login(login);
         if (user.getPassword().equals(password)){
@@ -36,11 +40,6 @@ public class UserService {
     public User getUser(Integer id){
         logger.info("/************UserService/get User Id****************/");
         return jdbcUserRepository.getUser(id);
-    }
-
-    public void create (User user){
-        logger.info("/************UserService/create User****************/");
-        jdbcUserRepository.create(user);
     }
 
     public void update (User user,Integer id){
