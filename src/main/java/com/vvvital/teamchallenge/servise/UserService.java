@@ -17,14 +17,22 @@ public class UserService {
     private final JdbcUserRepository jdbcUserRepository;
 
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     public UserService(JdbcUserRepository jdbcUserRepository) {
         this.jdbcUserRepository = jdbcUserRepository;
     }
 
-    public void create (User user){
+    public User create (User user) {
         logger.info("/************UserService/create User****************/");
-        jdbcUserRepository.create(user);
+        return jdbcUserRepository.create(user);
+//        String email = user.getEmail();
+//        String subject = "Підтвердження реестрації";
+//        String massage = "Для підтверження реестрації перейдіть за посиланням  localhost:8080/confirm?code="+EmailService.codeGenerator();
+//        emailService.sendMail(email,subject,massage);
     }
+
     public User login(String login, String password){
         User user = jdbcUserRepository.login(login);
         if (user.getPassword().equals(password)){

@@ -9,6 +9,4 @@ public class TeamChallengeApplication {
     public static void main(String[] args) {
         SpringApplication.run(TeamChallengeApplication.class, args);
     }
-
-
 }

@@ -32,12 +32,13 @@ public class JdbcUserRepository implements com.vvvital.teamchallenge.repository.
         insertUser.usingGeneratedKeyColumns("id");
     }
 
-    public void create(User user) {
+    public User create(User user) {
         logger.info("*************User Repository/create Users***********");
         BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(user);
         Number keyNew = insertUser.executeAndReturnKey(parameterSource);
         Integer id = keyNew.intValue();
         user.setId(id);
+        return getUser(id);
     }
 
     public User login(String email) {

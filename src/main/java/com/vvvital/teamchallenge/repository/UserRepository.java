@@ -10,7 +10,7 @@ public interface UserRepository {
 
     User getUser(Integer id);
 
-    void create(User user);
+    User create(User user);
 
     void update(User user,Integer id);
 
