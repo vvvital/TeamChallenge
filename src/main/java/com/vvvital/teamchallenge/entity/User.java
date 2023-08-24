@@ -16,21 +16,16 @@ public class User {
     @Email
     @NotBlank
     private String email;
-
     @NotBlank
     private String name;
-
     private String surName;
-
     private String phone;
-
     @NotBlank
     private String password;
-
     @Enumerated
     private Role role;
-
-    private List<TypeOfService> typeOfServices;
+    @Enumerated
+    private List<Categories> categories;
 
     public User(String mail, String name, String surname, String phone, String password) {
         this.email = mail;
@@ -84,8 +79,8 @@ public class User {
         return role;
     }
 
-    public List<TypeOfService> getTypeOfServices() {
-        return typeOfServices;
+    public List<Categories> getCategories() {
+        return categories;
     }
 
     //********SETTERS*************
@@ -117,7 +112,7 @@ public class User {
         this.role = role;
     }
 
-    public void setTypeOfServices(List<TypeOfService> typeOfServices) {
-        this.typeOfServices = typeOfServices;
+    public void setCategories(Categories ... categories) {
+        this.categories.addAll(List.of(categories));
     }
 }
