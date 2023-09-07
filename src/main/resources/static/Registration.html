@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Registration</h1>
-<form action="http://localhost:8080/createUser" method="post">
+<form action="http://134.249.52.201:8080/createUser" method="post">
     <p>email</p>
     <label for="email"></label>
     <input type="text" name="email" id="email" maxlength="30" value="">
@@ -22,6 +22,27 @@
     <p>password</p>
     <label for="password"></label>
     <input type="text" name="password" id="password" maxlength="30" value="">
+    <p>role</p>
+    <p>
+        <label for="USER"></label>User<input type="radio" name="roleIn" id="USER" value="USER">
+        <label for="PSYCHOLOGIST">Psychologist</label><input type="radio" name="roleIn" id="PSYCHOLOGIST"
+                                                             value="PSYCHOLOGIST">
+        <label for="ADMIN">Admin</label><input type="radio" name="roleIn" id="ADMIN" value="ADMIN">
+    </p>
+    <p>Categories</p>
+    <fieldset>
+        <label for="Клінічний психолог">Клінічний психолог</label><input type="checkbox" name="categoriesIn"
+                                                                         id="Клінічний психолог"
+                                                                         value="CLINICAL_PSYCHOLOGIST">
+        <label for="Дитячий психолог">Дитячий психолог</label><input type="checkbox" name="categoriesIn"
+                                                                     id="Дитячий психолог" value="CHILD_PSYCHOLOGIST">
+        <label for="Сімейний психолог">Сімейний психолог</label><input type="checkbox" name="categoriesIn"
+                                                                       id="Сімейний психолог"
+                                                                       value="FAMILY_PSYCHOLOGIST">
+        <label for="Організаційний психолог">Організаційний психолог</label><input type="checkbox" name="categoriesIn"
+                                                                                   id="Організаційний психолог"
+                                                                                   value="ORGANIZATIONAL_PSYCHOLOGIST">
+    </fieldset>
     <p>
         <input type="submit"> <input type="reset">
     </p>

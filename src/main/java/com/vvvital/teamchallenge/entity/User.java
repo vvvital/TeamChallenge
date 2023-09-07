@@ -1,8 +1,6 @@
 package com.vvvital.teamchallenge.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -22,21 +20,24 @@ public class User {
     private String phone;
     @NotBlank
     private String password;
-    @Enumerated
-    private Role role;
-    @Enumerated
-    private List<Categories> categories;
+    @Enumerated(EnumType.STRING)
+//    @CollectionTable(name = "user_roles",
+//            joinColumns = @JoinColumn (name = "user_id"),
+//            uniqueConstraints = @UniqueConstraint(name = "user_roles_idx", columnNames = {user_id,role}))
 
-    public User(String mail, String name, String surname, String phone, String password) {
+    private Role role;
+    private String user_id;
+
+    public User(String mail, String name, String surname, String phone, String password, Role role) {
         this.email = mail;
         this.name = name;
         this.surName = surname;
         this.phone = phone;
         this.password = password;
+        this.role = role;
     }
 
     public User() {
-
     }
 
     @Override
@@ -79,10 +80,6 @@ public class User {
         return role;
     }
 
-    public List<Categories> getCategories() {
-        return categories;
-    }
-
     //********SETTERS*************
     public void setId(Integer id) {
         this.id = id;
@@ -110,9 +107,5 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public void setCategories(Categories ... categories) {
-        this.categories.addAll(List.of(categories));
     }
 }
