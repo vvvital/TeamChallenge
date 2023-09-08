@@ -22,6 +22,7 @@ class TeamChallengeApplicationTests {
     void contextLoads() {
     }
 
+
     @Test
     void jdbcTest(){
         List<User>expectedUsers= Arrays.asList(
@@ -36,10 +37,7 @@ class TeamChallengeApplicationTests {
              ) {
             System.out.println(u.toString());
         }
-        for (User u:expectedUsers
-             ) {
-            System.out.println(u.toString());
-        }
 
     }
+
 }

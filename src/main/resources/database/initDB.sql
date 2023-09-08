@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS psychologist;
 
 DROP SEQUENCE IF EXISTS global_seq;
+DROP SEQUENCE IF EXISTS psych_seq;
 
 CREATE SEQUENCE global_seq START WITH 1000;
 
@@ -25,6 +26,7 @@ CREATE TABLE IF NOT EXISTS psychologist (
     name        VARCHAR,
     surName     VARCHAR,
     email       VARCHAR,
+    password    VARCHAR,
     phone       VARCHAR,
     price       VARCHAR,
     location    VARCHAR,

@@ -51,7 +51,16 @@ public class Psychologist {
         this.photoLink = photoLink;
     }
 
+    public Psychologist(String name, String surName, String email, String password, String phone) {
+        this.name = name;
+        this.surName = surName;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+    }
+
     public Psychologist(){}
+
 
     //<-----getters----->
     public Integer getId() {
@@ -173,5 +182,26 @@ public class Psychologist {
 
     public void setExperience(Integer experience) {
         this.experience = experience;
+    }
+
+    @Override
+    public String toString() {
+        return "Psychologist{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surName='" + surName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", price=" + price +
+                ", location='" + location + '\'' +
+                ", online=" + online +
+                ", offline=" + offline +
+                ", experience=" + experience +
+                ", rating=" + rating +
+                ", description='" + description + '\'' +
+                ", categories=" + categories +
+                ", photoLink='" + photoLink + '\'' +
+                '}';
     }
 }

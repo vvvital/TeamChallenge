@@ -26,13 +26,13 @@ public class PsychologistController {
             @RequestParam String email,
             @RequestParam String password,
             @RequestParam String phone,
-            @RequestParam String price,
-            @RequestParam(required = false) String location,
-            @RequestParam(required = false) String online,
-            @RequestParam(required = false) String offline,
-            @RequestParam(required = false) String experience,
-            @RequestParam(required = false) String description,
-            @RequestParam(required = false) String photoLink
+            @RequestParam(required = false,defaultValue = "0") String price,
+            @RequestParam(required = false,defaultValue = "Ukraine") String location,
+            @RequestParam(required = false,defaultValue = "false") String online,
+            @RequestParam(required = false,defaultValue = "false") String offline,
+            @RequestParam(required = false,defaultValue = "0") String experience,
+            @RequestParam(required = false, defaultValue = "") String description,
+            @RequestParam(required = false,defaultValue = "") String photoLink
     ) {
         Psychologist psychologist = new Psychologist(name, surNane, email, password, phone,
                 strToInt(price), location, strToBool(online), strToBool(offline), strToInt(experience), description, photoLink);
