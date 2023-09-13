@@ -2,7 +2,7 @@ package com.vvvital.teamchallenge.entity;
 
 public enum Categories {
 
-    CLINICAL_PSYCHOLOGIST ("Клінічний психолог"),
+    CLINICAL_PSYCHOLOGIST("Клінічний психолог"),
     CHILD_PSYCHOLOGIST("Дитячий психолог"),
     FAMILY_PSYCHOLOGIST("Сімейний психолог"),
     ORGANIZATIONAL_PSYCHOLOGIST("Організаційний психолог"),
@@ -28,5 +28,17 @@ public enum Categories {
     @Override
     public String toString() {
         return displayCategories;
+    }
+
+    public static Categories strToEnum(String string){
+        return switch (string){
+            case ("Клінічний психолог")-> CLINICAL_PSYCHOLOGIST;
+            case ("Дитячий психолог")-> CHILD_PSYCHOLOGIST;
+            case ("Сімейний психолог")-> FAMILY_PSYCHOLOGIST;
+            case ("Організаційний психолог")-> ORGANIZATIONAL_PSYCHOLOGIST;
+            case ("Психотерапевт")->PSYCHOTHERAPIST;
+
+            default -> throw new IllegalStateException("Unexpected value: " + string);
+        };
     }
 }

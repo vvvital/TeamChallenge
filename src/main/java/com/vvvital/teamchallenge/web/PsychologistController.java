@@ -1,7 +1,11 @@
 package com.vvvital.teamchallenge.web;
 
+import com.vvvital.teamchallenge.ServletInitializer;
+import com.vvvital.teamchallenge.TeamChallengeApplication;
+import com.vvvital.teamchallenge.entity.Categories;
 import com.vvvital.teamchallenge.entity.Psychologist;
 import com.vvvital.teamchallenge.servise.PsychologistService;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,7 @@ public class PsychologistController {
     @Autowired
     public PsychologistController(PsychologistService psychologistService) {
         this.psychologistService = psychologistService;
+        logger.info("/////////////Controller start/////////////////");
     }
 
     @PostMapping("/psychologist/create")
@@ -34,8 +39,10 @@ public class PsychologistController {
             @RequestParam(required = false, defaultValue = "") String description,
             @RequestParam(required = false,defaultValue = "") String photoLink
     ) {
+        logger.info("******************/psychologist/create******************");
         Psychologist psychologist = new Psychologist(name, surNane, email, password, phone,
-                strToInt(price), location, strToBool(online), strToBool(offline), strToInt(experience), description, photoLink);
+                strToInt(price), location, strToBool(online), strToBool(offline), strToInt(experience), description, photoLink,Categories.ORGANIZATIONAL_PSYCHOLOGIST);
+        System.out.println(psychologist.toString());
         return psychologistService.create(psychologist);
     }
 
@@ -54,6 +61,7 @@ public class PsychologistController {
 
     @GetMapping("/psychologist/getAll")
     public List<Psychologist> getAll() {
+        logger.info("**************PsychologistController/getAll********************");
         return psychologistService.getAll();
     }
 

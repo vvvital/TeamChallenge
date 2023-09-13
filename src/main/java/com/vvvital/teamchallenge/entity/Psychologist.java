@@ -1,11 +1,14 @@
 package com.vvvital.teamchallenge.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -30,13 +33,21 @@ public class Psychologist {
     private Integer experience;
     private Integer rating;
     private String description;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
+
+    @CollectionTable(name = "psychologist_categories", joinColumns = @JoinColumn(name = "psychologist_id"),
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"psychologist_id", "categories"}, name = "psychologist_categories")})
+    @Column(name = "categories")
+    @ElementCollection(fetch = FetchType.EAGER)
+    //    @Fetch(FetchMode.SUBSELECT)
+    @JoinColumn
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Categories> categories;
     private String photoLink;
 
     public Psychologist(String name, String surName, String email, String password, String phone,
                         Integer price, String location, Boolean online, Boolean offline,
-                        Integer experience, String description, String photoLink) {
+                        Integer experience, String description, String photoLink, Categories...categoriesArr) {
         this.name = name;
         this.surName = surName;
         this.email = email;
@@ -49,6 +60,8 @@ public class Psychologist {
         this.experience = experience;
         this.description = description;
         this.photoLink = photoLink;
+        categories=new HashSet<Categories>();
+        Collections.addAll(categories,categoriesArr);
     }
 
     public Psychologist(String name, String surName, String email, String password, String phone) {
@@ -156,8 +169,12 @@ public class Psychologist {
         this.description = description;
     }
 
-    public void setCategories(Set<Categories> categories) {
-        this.categories = categories;
+
+    public void setCategories(Categories[] categoriesArr) {
+        Collections.addAll(categories,categoriesArr);
+    }
+    public void setCategoriesSet(Set<Categories>categoriesSet){
+        categories=categoriesSet;
     }
 
     public void setPhotoLink(String photoLink) {

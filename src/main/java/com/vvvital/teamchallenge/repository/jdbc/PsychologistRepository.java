@@ -1,16 +1,20 @@
 package com.vvvital.teamchallenge.repository.jdbc;
 
+import com.vvvital.teamchallenge.entity.Categories;
 import com.vvvital.teamchallenge.entity.Psychologist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.SqlReturnResultSet;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.sql.ResultSet;
+import java.util.*;
 
 @Repository
 public class PsychologistRepository {
@@ -28,16 +32,33 @@ public class PsychologistRepository {
     }
 
     public Psychologist create(Psychologist psychologist) {
-        BeanPropertySqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(psychologist);
-        Number keyNew = insert.executeAndReturnKey(sqlParameterSource);
+        BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(psychologist);
+        Number keyNew = insert.executeAndReturnKey(parameterSource);
         Integer id = keyNew.intValue();
         psychologist.setId(id);
-        return get(id);
+        for (Categories s:psychologist.getCategories()
+             ) {
+            System.out.println(s);
+            jdbcTemplate.update("insert into psychologist_categories values (?,?)",id,s.toString());
+        }
+        System.out.println(psychologist);
+        Psychologist psychologistNew=get(id);
+        System.out.println(psychologistNew);
+        return psychologistNew;
     }
 
     public Psychologist get(Integer id) {
         List<Psychologist> psychologists = jdbcTemplate.query("SELECT * FROM psychologist WHERE id=?", ROW_MAPPER, id);
-        return DataAccessUtils.singleResult(psychologists);
+        Map<Integer, Set<Categories>> map = new HashMap<>();
+        jdbcTemplate.query("SELECT * FROM psychologist_categories", rs -> {
+            map.computeIfAbsent(rs.getInt("psychologist_id"), userId -> EnumSet.noneOf(Categories.class))
+                    .add(Categories.strToEnum(rs.getString("categories")));
+        });
+        Set<Categories>categoriesSet=map.get(id);
+        Psychologist psychologist= DataAccessUtils.singleResult(psychologists);
+        assert psychologist != null;
+        psychologist.setCategoriesSet(categoriesSet);
+        return psychologist;
     }
 
     public List<Psychologist> getAll(){
@@ -52,4 +73,5 @@ public class PsychologistRepository {
     public void delete(Integer id) {
         jdbcTemplate.update("DELETE FROM psychologist WHERE id=?", id);
     }
+
 }
