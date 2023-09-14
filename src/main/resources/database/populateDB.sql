@@ -1,4 +1,4 @@
-ALTER SEQUENCE global_seq RESTART WITH 1000;
+
 
 insert into users ( email, name, surName, phone, password)
 values ('email1@mail.ua','name1','surname1','phoneNumber1','123456'),
@@ -10,7 +10,26 @@ values ('email1@mail.ua','name1','surname1','phoneNumber1','123456'),
 insert into psychologist(name, surname, email, password, phone, price, location, online, offline, experience, rating, description, photolink)
 values ('Сергій','Павленко','sergiy@gmail.com','password','0505555555','100','KYIV',true,true,'5','5','Опис психолога','https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing'),
        ('Валерій','Осипов','osipov@gmail.com','password','0601234567','50','LVIV',false,true,'2','4','Опис психолога','https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing'),
-       ('Марьяна','Іванова','ivanova@gmail.com','password','0504442233','80','',true,false,'4','5','Опис психолога','https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing'),
+       ('Марьяна','Іванова','ivanova@gmail.com','password','0504442233','80','KYIV',true,false,'4','5','Опис психолога','https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing'),
        ('Петро','Петров','petrov@gmail.com','password','0445556644','100','ODESSA',true,true,'6','5','Опис психолога','https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing'),
        ('Оксана','Прокопенко','oksana@gmail.com','password','0565551122','80','DNIPRO',true,true,'1','5','Опис психолога','https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing'),
-       ('Марія','Примаченко','maria@gmail.com','password','0442223344','80','',true,false,'6','5','Опис психолога','https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing');
+       ('Марія','Примаченко','maria@gmail.com','password','0442223344','80','LVIV',true,false,'6','5','Опис психолога','https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing');
+
+insert into psychologist_categories(psychologist_id, categories) values
+       (1,'Клінічний психолог'),
+       (1,'Дитячий психолог'),
+       (1,'Сімейний психолог'),
+       (2,'Організаційний психолог'),
+       (2,'Психотерапевт'),
+       (2,'Психолог з проблем залежностей'),
+       (3,'Шкільний психолог'),
+       (4,'Психолог для підлітків'),
+       (4,'Психолог для старшої вікової категорії'),
+       (4,'Спортивний психолог'),
+       (5,'Психолог-сексолог'),
+       (5,'Групова терапія'),
+       (5,'Онлайн консультації'),
+       (6,'Рекомендовані психологи'),
+       (6,'Мають статті'),
+       (6,'Онлайн консультації');
+

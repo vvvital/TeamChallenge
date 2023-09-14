@@ -10,7 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
@@ -31,17 +36,17 @@ public class PsychologistController {
             @RequestParam String email,
             @RequestParam String password,
             @RequestParam String phone,
-            @RequestParam(required = false,defaultValue = "0") String price,
-            @RequestParam(required = false,defaultValue = "Ukraine") String location,
-            @RequestParam(required = false,defaultValue = "false") String online,
-            @RequestParam(required = false,defaultValue = "false") String offline,
-            @RequestParam(required = false,defaultValue = "0") String experience,
+            @RequestParam(required = false, defaultValue = "0") String price,
+            @RequestParam(required = false, defaultValue = "Ukraine") String location,
+            @RequestParam(required = false, defaultValue = "false") String online,
+            @RequestParam(required = false, defaultValue = "false") String offline,
+            @RequestParam(required = false, defaultValue = "0") String experience,
             @RequestParam(required = false, defaultValue = "") String description,
-            @RequestParam(required = false,defaultValue = "") String photoLink
+            @RequestParam(required = false, defaultValue = "") String photoLink
     ) {
         logger.info("******************/psychologist/create******************");
         Psychologist psychologist = new Psychologist(name, surNane, email, password, phone,
-                strToInt(price), location, strToBool(online), strToBool(offline), strToInt(experience), description, photoLink,Categories.ORGANIZATIONAL_PSYCHOLOGIST);
+                strToInt(price), location, strToBool(online), strToBool(offline), strToInt(experience), description, photoLink, Categories.ORGANIZATIONAL_PSYCHOLOGIST);
         System.out.println(psychologist.toString());
         return psychologistService.create(psychologist);
     }
@@ -60,9 +65,18 @@ public class PsychologistController {
     }
 
     @GetMapping("/psychologist/getAll")
-    public List<Psychologist> getAll() {
+    public List<Psychologist> getAll(
+            @RequestParam(required = false) String[] categories,
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false) String appointment,
+            @RequestParam(required = false) String experience,
+            @RequestParam(required = false) String price,
+            @RequestParam(required = false) String rating
+    ) {
         logger.info("**************PsychologistController/getAll********************");
-        return psychologistService.getAll();
+        Set<Categories>categoriesSet=Categories.arrToSet(categories);
+        return psychologistService.getAll(categoriesSet);
+
     }
 
     @GetMapping("/psychologist/get")

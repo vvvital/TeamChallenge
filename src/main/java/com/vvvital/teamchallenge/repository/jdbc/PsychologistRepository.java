@@ -16,6 +16,8 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.util.*;
 
+import static com.vvvital.teamchallenge.entity.Location.DNIPRO;
+
 @Repository
 public class PsychologistRepository {
 
@@ -23,6 +25,9 @@ public class PsychologistRepository {
     private final static BeanPropertyRowMapper<Psychologist> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Psychologist.class);
     private final JdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert insert;
+
+    private final String GET_ALL="SELECT * FROM psychologist";
+    private final String GET_ALL_LOCATION="";
 
     public PsychologistRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -49,20 +54,16 @@ public class PsychologistRepository {
 
     public Psychologist get(Integer id) {
         List<Psychologist> psychologists = jdbcTemplate.query("SELECT * FROM psychologist WHERE id=?", ROW_MAPPER, id);
-        Map<Integer, Set<Categories>> map = new HashMap<>();
-        jdbcTemplate.query("SELECT * FROM psychologist_categories", rs -> {
-            map.computeIfAbsent(rs.getInt("psychologist_id"), userId -> EnumSet.noneOf(Categories.class))
-                    .add(Categories.strToEnum(rs.getString("categories")));
-        });
-        Set<Categories>categoriesSet=map.get(id);
         Psychologist psychologist= DataAccessUtils.singleResult(psychologists);
         assert psychologist != null;
-        psychologist.setCategoriesSet(categoriesSet);
+        psychologist.setCategoriesSet(getCategories(id));
         return psychologist;
     }
 
     public List<Psychologist> getAll(){
-        return jdbcTemplate.query("SELECT * FROM psychologist",ROW_MAPPER);
+        List<Psychologist>psychologists = jdbcTemplate.query("SELECT * FROM psychologist",ROW_MAPPER);
+        psychologists.forEach(psychologist -> psychologist.setCategoriesSet(getCategories(psychologist.getId())));
+        return psychologists;
     }
 
     public Psychologist getEmail(String email){
@@ -72,6 +73,16 @@ public class PsychologistRepository {
 
     public void delete(Integer id) {
         jdbcTemplate.update("DELETE FROM psychologist WHERE id=?", id);
+    }
+
+    public Set<Categories> getCategories(Integer id){
+        Map<Integer, Set<Categories>> map = new HashMap<>();
+        jdbcTemplate.query("SELECT * FROM psychologist_categories", rs -> {
+            map.computeIfAbsent(rs.getInt("psychologist_id"), userId -> EnumSet.noneOf(Categories.class))
+                    .add(Categories.strToEnum(rs.getString("categories")));
+        });
+        Set<Categories>categoriesSet=map.get(id);
+        return categoriesSet;
     }
 
 }

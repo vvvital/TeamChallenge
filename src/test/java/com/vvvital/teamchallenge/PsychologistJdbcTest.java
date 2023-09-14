@@ -6,6 +6,9 @@ import com.vvvital.teamchallenge.repository.jdbc.PsychologistRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -39,6 +42,12 @@ public class PsychologistJdbcTest {
         System.out.println(psychologistCurrent);
 //        assertThat(psychologistCurrent).usingRecursiveComparison().ignoringActualNullFields().isEqualTo(psychologistExpected);
 
+    }
+
+    @Test
+    public void getAll(){
+        List<Psychologist>psychologists=repository.getAll();
+        psychologists.forEach(System.out::println);
     }
 
 }

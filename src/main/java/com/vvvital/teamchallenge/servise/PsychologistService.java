@@ -1,5 +1,6 @@
 package com.vvvital.teamchallenge.servise;
 
+import com.vvvital.teamchallenge.entity.Categories;
 import com.vvvital.teamchallenge.entity.Psychologist;
 import com.vvvital.teamchallenge.repository.jdbc.PsychologistRepository;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PsychologistService {
@@ -32,8 +34,16 @@ public class PsychologistService {
         }
     }
 
-    public List<Psychologist> getAll(){
-        return psychologistRepository.getAll();
+    public List<Psychologist> getAll(Set<Categories> categoriesSet){
+        List<Psychologist>psychologists=psychologistRepository.getAll();
+            if (!categoriesSet.isEmpty()){
+                for (Psychologist p:psychologists
+                     ) {
+                    
+                }
+            }
+
+        return psychologists;
     }
 
     public Psychologist get(Integer id){
@@ -42,5 +52,15 @@ public class PsychologistService {
 
     public void delete(Integer id){
         psychologistRepository.delete(id);
+    }
+
+    public String queryByLocation(String location){
+        return switch  (location){
+            case ("KYIV")-> "SELECT * FROM psychologist WHERE location='KYIV'";
+            case ("LVIV")-> "SELECT * FROM psychologist WHERE location='LVIV'";
+            case ("ODESSA")-> "SELECT * FROM psychologist WHERE location='ODESSA'";
+            case ("DNIPRO")-> "SELECT * FROM psychologist WHERE location='DNIPRO'";
+            default -> throw new IllegalStateException("Unexpected value: " + location);
+        };
     }
 }
