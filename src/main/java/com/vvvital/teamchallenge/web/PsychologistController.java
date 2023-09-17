@@ -3,7 +3,9 @@ package com.vvvital.teamchallenge.web;
 import com.vvvital.teamchallenge.ServletInitializer;
 import com.vvvital.teamchallenge.TeamChallengeApplication;
 import com.vvvital.teamchallenge.entity.Categories;
+import com.vvvital.teamchallenge.entity.Location;
 import com.vvvital.teamchallenge.entity.Psychologist;
+import com.vvvital.teamchallenge.entity.PsychologistToSend;
 import com.vvvital.teamchallenge.servise.PsychologistService;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -46,7 +48,7 @@ public class PsychologistController {
     ) {
         logger.info("******************/psychologist/create******************");
         Psychologist psychologist = new Psychologist(name, surNane, email, password, phone,
-                strToInt(price), location, strToBool(online), strToBool(offline), strToInt(experience), description, photoLink, Categories.ORGANIZATIONAL_PSYCHOLOGIST);
+                strToInt(price), Location.valueOf(location), strToBool(online), strToBool(offline), strToInt(experience), description, photoLink, Categories.ORGANIZATIONAL_PSYCHOLOGIST);
         System.out.println(psychologist.toString());
         return psychologistService.create(psychologist);
     }
@@ -65,18 +67,29 @@ public class PsychologistController {
     }
 
     @GetMapping("/psychologist/getAll")
-    public List<Psychologist> getAll(
+    public List<PsychologistToSend> getAll(
             @RequestParam(required = false) String[] categories,
             @RequestParam(required = false) String location,
-            @RequestParam(required = false) String appointment,
-            @RequestParam(required = false) String experience,
-            @RequestParam(required = false) String price,
-            @RequestParam(required = false) String rating
+            @RequestParam(required = false) String priceMin,
+            @RequestParam(required = false) String priceMax,
+            @RequestParam(required = false) String experienceMin,
+            @RequestParam(required = false) String experienceMax,
+            @RequestParam(required = false) String ratingMin,
+            @RequestParam(required = false) String ratingMax,
+            @RequestParam(required = false) String order
+
     ) {
         logger.info("**************PsychologistController/getAll********************");
-        Set<Categories>categoriesSet=Categories.arrToSet(categories);
-        return psychologistService.getAll(categoriesSet);
-
+        Location location1 = null;
+        Set<Categories> categoriesSet = new HashSet<>();
+        if (categories != null) {
+            categoriesSet = Arrays.stream(categories).map(Categories::valueOf).collect(Collectors.toSet());
+        } else if (location != null) {
+            location1 = Location.valueOf(location);
+            logger.info("**************location = {}",location);
+        }
+        return psychologistService.getAll(categoriesSet, location1,strToInt(priceMin),strToInt(priceMax),
+                strToInt(experienceMin),strToInt(experienceMax),strToInt(ratingMin),strToInt(ratingMax),order);
     }
 
     @GetMapping("/psychologist/get")

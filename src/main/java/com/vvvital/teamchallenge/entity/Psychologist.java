@@ -27,7 +27,7 @@ public class Psychologist {
     @NotBlank
     private String phone;
     private Integer price;
-    private String location;
+    private Location location;
     private Boolean online;
     private Boolean offline;
     private Integer experience;
@@ -46,7 +46,7 @@ public class Psychologist {
     private String photoLink;
 
     public Psychologist(String name, String surName, String email, String password, String phone,
-                        Integer price, String location, Boolean online, Boolean offline,
+                        Integer price, Location location, Boolean online, Boolean offline,
                         Integer experience, String description, String photoLink, Categories...categoriesArr) {
         this.name = name;
         this.surName = surName;
@@ -120,7 +120,7 @@ public class Psychologist {
         return price;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
@@ -185,7 +185,7 @@ public class Psychologist {
         this.price = price;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 

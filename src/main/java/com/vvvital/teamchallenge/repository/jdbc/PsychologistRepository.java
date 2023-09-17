@@ -7,16 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.SqlReturnResultSet;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
 import java.util.*;
-
-import static com.vvvital.teamchallenge.entity.Location.DNIPRO;
 
 @Repository
 public class PsychologistRepository {
@@ -81,8 +76,7 @@ public class PsychologistRepository {
             map.computeIfAbsent(rs.getInt("psychologist_id"), userId -> EnumSet.noneOf(Categories.class))
                     .add(Categories.strToEnum(rs.getString("categories")));
         });
-        Set<Categories>categoriesSet=map.get(id);
-        return categoriesSet;
+        return map.get(id);
     }
 
 }

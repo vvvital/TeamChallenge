@@ -8,12 +8,12 @@ values ('email1@mail.ua','name1','surname1','phoneNumber1','123456'),
        ('email5@mail.ua','name5','surname5','phoneNumber5','567890');
 
 insert into psychologist(name, surname, email, password, phone, price, location, online, offline, experience, rating, description, photolink)
-values ('Сергій','Павленко','sergiy@gmail.com','password','0505555555','100','KYIV',true,true,'5','5','Опис психолога','https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing'),
-       ('Валерій','Осипов','osipov@gmail.com','password','0601234567','50','LVIV',false,true,'2','4','Опис психолога','https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing'),
-       ('Марьяна','Іванова','ivanova@gmail.com','password','0504442233','80','KYIV',true,false,'4','5','Опис психолога','https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing'),
-       ('Петро','Петров','petrov@gmail.com','password','0445556644','100','ODESSA',true,true,'6','5','Опис психолога','https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing'),
-       ('Оксана','Прокопенко','oksana@gmail.com','password','0565551122','80','DNIPRO',true,true,'1','5','Опис психолога','https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing'),
-       ('Марія','Примаченко','maria@gmail.com','password','0442223344','80','LVIV',true,false,'6','5','Опис психолога','https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing');
+values ('Сергій','Павленко','sergiy@gmail.com','password','0505555555','100','KYIV',true,true,'5','1','Опис психолога','https://drive.google.com/uc?export=view&id=1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6'),
+       ('Валерій','Осипов','osipov@gmail.com','password','0601234567','50','LVIV',false,true,'2','2','Опис психолога','https://drive.google.com/uc?export=view&id=1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6'),
+       ('Марьяна','Іванова','ivanova@gmail.com','password','0504442233','80','KYIV',true,false,'4','3','Опис психолога','https://drive.google.com/uc?export=view&id=1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6'),
+       ('Петро','Петров','petrov@gmail.com','password','0445556644','100','ODESSA',true,true,'6','4','Опис психолога','https://drive.google.com/uc?export=view&id=1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6'),
+       ('Оксана','Прокопенко','oksana@gmail.com','password','0565551122','80','DNIPRO',true,true,'1','5','Опис психолога','https://drive.google.com/uc?export=view&id=1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6'),
+       ('Марія','Примаченко','maria@gmail.com','password','0442223344','80','LVIV',true,false,'6','5','Опис психолога','https://drive.google.com/uc?export=view&id=1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6');
 
 insert into psychologist_categories(psychologist_id, categories) values
        (1,'Клінічний психолог'),
