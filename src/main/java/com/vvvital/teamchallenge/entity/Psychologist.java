@@ -34,7 +34,6 @@ public class Psychologist {
     private Integer rating;
     private String description;
     @Enumerated(EnumType.STRING)
-
     @CollectionTable(name = "psychologist_categories", joinColumns = @JoinColumn(name = "psychologist_id"),
             uniqueConstraints = {@UniqueConstraint(columnNames = {"psychologist_id", "categories"}, name = "psychologist_categories")})
     @Column(name = "categories")

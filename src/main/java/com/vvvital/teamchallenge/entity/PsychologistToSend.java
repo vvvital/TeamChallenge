@@ -5,21 +5,21 @@ import java.util.Set;
 
 public class PsychologistToSend {
 
-    private Integer id;
-    private String name;
-    private String surName;
-    private String email;
+    private final Integer id;
+    private final String name;
+    private final String surName;
+    private final String email;
     //private String password;
-    private String phone;
-    private Integer price;
-    private String location;
+    private final String phone;
+    private final Integer price;
+    private final String location;
     //private Boolean online;
     //private Boolean offline;
-    private Integer experience;
-    private Integer rating;
-    private String description;
-    private Set<String> categoriesSet=new HashSet<>();
-    private String photoLink;
+    private final Integer experience;
+    private final Integer rating;
+    private final String description;
+    private final Set<String> categoriesSet=new HashSet<>();
+    private final String photoLink;
 
     public Integer getId() {
         return id;

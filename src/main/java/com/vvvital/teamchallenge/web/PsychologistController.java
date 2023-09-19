@@ -1,13 +1,10 @@
 package com.vvvital.teamchallenge.web;
 
-import com.vvvital.teamchallenge.ServletInitializer;
-import com.vvvital.teamchallenge.TeamChallengeApplication;
 import com.vvvital.teamchallenge.entity.Categories;
 import com.vvvital.teamchallenge.entity.Location;
 import com.vvvital.teamchallenge.entity.Psychologist;
 import com.vvvital.teamchallenge.entity.PsychologistToSend;
 import com.vvvital.teamchallenge.servise.PsychologistService;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +36,7 @@ public class PsychologistController {
             @RequestParam String password,
             @RequestParam String phone,
             @RequestParam(required = false, defaultValue = "0") String price,
-            @RequestParam(required = false, defaultValue = "Ukraine") String location,
+            @RequestParam(required = false) String location,
             @RequestParam(required = false, defaultValue = "false") String online,
             @RequestParam(required = false, defaultValue = "false") String offline,
             @RequestParam(required = false, defaultValue = "0") String experience,
@@ -49,7 +46,7 @@ public class PsychologistController {
         logger.info("******************/psychologist/create******************");
         Psychologist psychologist = new Psychologist(name, surNane, email, password, phone,
                 strToInt(price), Location.valueOf(location), strToBool(online), strToBool(offline), strToInt(experience), description, photoLink, Categories.ORGANIZATIONAL_PSYCHOLOGIST);
-        System.out.println(psychologist.toString());
+        System.out.println(psychologist);
         return psychologistService.create(psychologist);
     }
 

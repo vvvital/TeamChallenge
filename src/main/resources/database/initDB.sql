@@ -1,8 +1,22 @@
+
 DROP TABLE IF EXISTS psychologist_categories;
 DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS psychologist;
+DROP TYPE IF EXISTS location;
+DROP TYPE IF EXISTS categories;
 
+CREATE TYPE Location AS ENUM (
+    'KYIV',
+    'LVIV',
+    'DNIPRO',
+    'ODESSA'
+    );
+CREATE TYPE Categories AS ENUM (
+    'PSYCHOTHERAPIST',
+    'ORGANIZATIONAL_PSYCHOLOGIST',
+    'CHILD_PSYCHOLOGIST'
+    );
 
 CREATE TABLE IF NOT EXISTS users
 (
@@ -36,7 +50,7 @@ CREATE TABLE IF NOT EXISTS psychologist
 CREATE TABLE psychologist_categories
 (
     psychologist_id INTEGER NOT NULL,
-    categories    VARCHAR NOT NULL,
+    categories      VARCHAR not null ,
     CONSTRAINT user_roles_idx UNIQUE (psychologist_id, categories),
     FOREIGN KEY (psychologist_id) REFERENCES psychologist (id) ON DELETE CASCADE
 );
