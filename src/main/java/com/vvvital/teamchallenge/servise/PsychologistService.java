@@ -26,6 +26,10 @@ public class PsychologistService {
         return psychologistRepository.create(psychologist);
     }
 
+    public Psychologist update(Psychologist psychologist){
+        return psychologistRepository.update(psychologist);
+    }
+
     public Psychologist login(String email, String password) {
         Psychologist psychologist = psychologistRepository.getEmail(email);
         if (psychologist.getPassword().equals(password)) {

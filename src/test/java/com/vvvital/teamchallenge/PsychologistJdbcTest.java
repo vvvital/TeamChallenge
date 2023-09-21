@@ -6,6 +6,7 @@ import com.vvvital.teamchallenge.entity.Psychologist;
 import com.vvvital.teamchallenge.entity.PsychologistToSend;
 import com.vvvital.teamchallenge.repository.jdbc.PsychologistRepository;
 import com.vvvital.teamchallenge.servise.PsychologistService;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,15 +28,33 @@ public class PsychologistJdbcTest {
         this.service = service;
     }
 
-        @Test
+    @Test
     public void create() {
-        Categories[] categories={Categories.PSYCHOTHERAPIST,Categories.ORGANIZATIONAL_PSYCHOLOGIST,Categories.CHILD_PSYCHOLOGIST};
+        Categories[] categories = {Categories.PSYCHOTHERAPIST, Categories.ORGANIZATIONAL_PSYCHOLOGIST, Categories.CHILD_PSYCHOLOGIST};
         Psychologist psychologist = new Psychologist(
                 "Vitaliy", "Kovalenko", "vvvital@i.ua", "123456", "0968469185",
-                100,KYIV,true,true,5,"Опис психолога",
-                "https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing",categories);
+                100, KYIV, true, true, 5, "Опис психолога",
+                "https://drive.google.com/file/d/1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6/view?usp=sharing", categories);
         repository.create(psychologist);
     }
+
+    @Test
+    public void update() {
+        Psychologist psychologist = repository.get(1);
+        if (psychologist == null) {
+            create();
+            psychologist = repository.get(1);
+        }
+        psychologist.setName("Sviyatoslav");
+        Set<Categories>categories=new HashSet<>();
+        categories.add(Categories.PSYCHOLOGIST_CLOSE);
+        categories.add(Categories.FAMILY_PSYCHOLOGIST);
+        psychologist.setLocation(LVIV);
+        psychologist.setCategoriesSet(categories);
+        psychologist=repository.update(psychologist);
+        System.out.println(psychologist);
+    }
+
     @Test
     public void get() {
 //        Categories[]categories={Categories.PSYCHOLOGIST_CLOSE,Categories.PSYCHOLOGIST_SEXOLOGIST,Categories.SCHOOL_PSYCHOLOGIST};

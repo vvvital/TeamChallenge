@@ -50,6 +50,7 @@ public class PsychologistController {
         return psychologistService.create(psychologist);
     }
 
+
     @PostMapping("/psychologist/login")
     public Psychologist login(
             @RequestParam String email,
@@ -59,8 +60,24 @@ public class PsychologistController {
     }
 
     @PostMapping("/psychologist/update")
-    public Psychologist update() {
-        return null;
+    public Psychologist update(
+            @RequestParam String name,
+            @RequestParam String surNane,
+            @RequestParam String email,
+            @RequestParam String password,
+            @RequestParam String phone,
+            @RequestParam(required = false, defaultValue = "0") String price,
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false, defaultValue = "false") String online,
+            @RequestParam(required = false, defaultValue = "false") String offline,
+            @RequestParam(required = false, defaultValue = "0") String experience,
+            @RequestParam(required = false, defaultValue = "") String description,
+            @RequestParam(required = false, defaultValue = "") String photoLink
+    ) {
+        Psychologist psychologist = new Psychologist(name, surNane, email, password, phone,
+                strToInt(price), Location.valueOf(location), strToBool(online), strToBool(offline), strToInt(experience), description, photoLink, Categories.ORGANIZATIONAL_PSYCHOLOGIST);
+        System.out.println(psychologist);
+        return psychologistService.update(psychologist);
     }
 
     @GetMapping("/psychologist/getAll")
