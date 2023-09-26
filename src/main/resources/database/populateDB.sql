@@ -1,11 +1,11 @@
 
 
 insert into users ( email, name, surName, phone, password)
-values ('email1@mail.ua','name1','surname1','phoneNumber1','123456'),
-       ('email2@mail.ua','name2','surname2','phoneNumber2','234567'),
-       ('email3@mail.ua','name3','surname3','phoneNumber3','345678'),
-       ('email4@mail.ua','name4','surname4','phoneNumber4','456789'),
-       ('email5@mail.ua','name5','surname5','phoneNumber5','567890');
+values ('iryna@mail.ua','Ірина','Шаповал','0503322444','123456'),
+       ('valera@mail.ua','Валерій','Курага','0664567885','123456'),
+       ('semen@mail.ua','Семен','Ващенко','0674658595','123456'),
+       ('nastia@mail.ua','Настя','Семенченко','0442233554','123456'),
+       ('natasha@mail.ua','Наталья','Яриш','0994215689','123456');
 
 insert into psychologist(name, surname, email, password, phone, price, location, online, offline, experience, rating, description, photolink)
 values ('Сергій','Павленко','sergiy@gmail.com','password','0505555555','100','KYIV',true,true,'5','1','Опис психолога','https://drive.google.com/uc?export=view&id=1dQB6rvCpTjJJ8cSg6b6eZjuvB8mPkOz6'),
@@ -17,25 +17,16 @@ values ('Сергій','Павленко','sergiy@gmail.com','password','0505555
 
 insert into psychologist_categories(psychologist_id, categories) values
             (1,'PSYCHOTHERAPIST'),
-            (3,'PSYCHOTHERAPIST'),
+            (1,'CHILD_PSYCHOLOGIST'),
+            (1,'FAMILY_PSYCHOLOGIST'),
             (2,'ORGANIZATIONAL_PSYCHOLOGIST'),
-            (4,'ORGANIZATIONAL_PSYCHOLOGIST'),
-            (5,'CHILD_PSYCHOLOGIST'),
-            (6,'CHILD_PSYCHOLOGIST')
---        (1,'Клінічний психолог'),
---        (1,'Дитячий психолог'),
---        (1,'Сімейний психолог'),
---        (2,'Організаційний психолог'),
---        (2,'Психотерапевт'),
---        (2,'Психолог з проблем залежностей'),
---        (3,'Шкільний психолог'),
---        (4,'Психолог для підлітків'),
---        (4,'Психолог для старшої вікової категорії'),
---        (4,'Спортивний психолог'),
---        (5,'Психолог-сексолог'),
---        (5,'Групова терапія'),
---        (5,'Онлайн консультації'),
---        (6,'Рекомендовані психологи'),
---        (6,'Мають статті'),
---        (6,'Онлайн консультації');
+            (2,'PSYCHOTHERAPIST'),
+            (2,'PSYCHOLOGIST_ON_ADDICTION_PROBLEMS'),
+            (3,'SCHOOL_PSYCHOLOGIST'),
+            (3,'PSYCHOLOGIST_FOR_TEENAGERS'),
+            (4,'PSYCHOLOGIST_FOR_AGER'),
+            (4,'SPORTS_PSYCHOLOGIST'),
+            (5,'PSYCHOLOGIST_SEXOLOGIST'),
+            (6,'GROUP_THERAPY'),
+            (6,'ONLINE_CONSULTATION');
 
