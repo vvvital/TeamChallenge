@@ -34,7 +34,7 @@ public class UserController {
                        @RequestParam(required = true) String password,
                        @RequestParam(required = false) String roleIn
     ) {
-        logger.info("*******Controller/createUser*******{},{},{},{},{},{},{}", email, name, surName, phone, password, roleIn);
+        logger.info("*******Controller/createUser*******{},{},{},{},{},{}", email, name, surName, phone, password, roleIn);
         Role role = roleIn!=null? Role.stringToRole(roleIn):Role.USER;
         List<Categories> categories= Arrays.asList(Categories.CLINICAL_PSYCHOLOGIST,Categories.CHILD_PSYCHOLOGIST,Categories.FAMILY_PSYCHOLOGIST);
         User user = new User(email, name, surName, phone, password, role);
@@ -64,7 +64,8 @@ public class UserController {
     @GetMapping("/getUser")
     public User getUser(@RequestParam String id) {
         logger.info("*******Controller/getUser id= {}*******", id);
-        return userService.getUser(Integer.parseInt(id));
+        //return userService.getUser(Integer.parseInt(id));
+        return new User("test@mail.ua","Test Name","Test Surname","7777777777","password",Role.USER);
     }
 
     @PostMapping("/updateUser")
