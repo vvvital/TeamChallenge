@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/psychologist")
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class PsychologistController {
     Logger logger = LoggerFactory.getLogger(PsychologistController.class);
@@ -28,7 +29,7 @@ public class PsychologistController {
         logger.info("/////////////Controller start/////////////////");
     }
 
-    @PostMapping("/psychologist/create")
+    @PostMapping("/create")
     public Psychologist create(
             @RequestParam String name,
             @RequestParam String surNane,
@@ -51,7 +52,7 @@ public class PsychologistController {
     }
 
 
-    @PostMapping("/psychologist/login")
+    @PostMapping("/login")
     public Psychologist login(
             @RequestParam String email,
             @RequestParam String password
@@ -59,7 +60,7 @@ public class PsychologistController {
         return psychologistService.login(email, password);
     }
 
-    @PostMapping("/psychologist/update")
+    @PostMapping("/update")
     public Psychologist update(
             @RequestParam String name,
             @RequestParam String surNane,
@@ -80,7 +81,7 @@ public class PsychologistController {
         return psychologistService.update(psychologist);
     }
 
-    @GetMapping("/psychologist/getAll")
+    @GetMapping("/getAll")
     public List<PsychologistToSend> getAll(
             @RequestParam(required = false) String[] categories,
             @RequestParam(required = false) String location,
@@ -106,12 +107,12 @@ public class PsychologistController {
                 strToInt(experienceMin),strToInt(experienceMax),strToInt(ratingMin),strToInt(ratingMax),order);
     }
 
-    @GetMapping("/psychologist/get")
+    @GetMapping("/get")
     public Psychologist get(@RequestParam String id) {
         return psychologistService.get(strToInt(id));
     }
 
-    @GetMapping("/psychologist/delete")
+    @GetMapping("/delete")
     public void delete(@RequestParam String id) {
         psychologistService.delete(strToInt(id));
     }

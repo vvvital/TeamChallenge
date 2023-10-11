@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
+@RequestMapping("/user")
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class UserController {
     private final UserService userService;
@@ -26,7 +27,7 @@ public class UserController {
         logger.info("/***********Controller Constructor has been called*************/");
     }
 
-    @PostMapping("/createUser")
+    @PostMapping("/create")
     public User create(@RequestParam(required = true) String email,
                        @RequestParam(required = false) String name,
                        @RequestParam(required = true) String surName,
@@ -55,26 +56,26 @@ public class UserController {
         return user;
     }
 
-    @GetMapping("/getUsers")
+    @GetMapping("/getAll")
     public List<User> getUsers() {
         logger.info("*******Controller/getUsers*******");
         return userService.getUsers();
     }
 
-    @GetMapping("/getUser")
+    @GetMapping("/get")
     public User getUser(@RequestParam String id) {
         logger.info("*******Controller/getUser id= {}*******", id);
         //return userService.getUser(Integer.parseInt(id));
         return new User("test@mail.ua","Test Name","Test Surname","7777777777","password",Role.USER);
     }
 
-    @PostMapping("/updateUser")
+    @PostMapping("/update")
     public void update(User user, String id) {
         logger.info("*******Controller/updateUser*******");
         userService.update(user, Integer.parseInt(id));
     }
 
-    @GetMapping("deleteUser")
+    @GetMapping("/delete")
     public void delete(@RequestParam String id) {
         logger.info("*******Controller/deleteUser*******");
         userService.delete(Integer.parseInt(id));
