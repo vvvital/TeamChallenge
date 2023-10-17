@@ -61,7 +61,7 @@ public class PsychologistController {
     }
 
     @PostMapping("/update")
-    public Psychologist update(
+    public PsychologistToSend update(
             @RequestParam String name,
             @RequestParam String surNane,
             @RequestParam String email,
@@ -108,7 +108,12 @@ public class PsychologistController {
     }
 
     @GetMapping("/get")
-    public Psychologist get(@RequestParam String id) {
+    public PsychologistToSend get(
+            @RequestParam String id
+    ) {
+        Set<Categories> categories = new HashSet<>();
+        logger.info("****************************** method psychologist/get called ******************************");
+        categories.add(Categories.PSYCHOLOGIST_CLOSE);
         return psychologistService.get(strToInt(id));
     }
 

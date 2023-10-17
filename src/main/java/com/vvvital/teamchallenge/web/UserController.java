@@ -66,7 +66,7 @@ public class UserController {
     public User getUser(@RequestParam String id) {
         logger.info("*******Controller/getUser id= {}*******", id);
         //return userService.getUser(Integer.parseInt(id));
-        return new User("test@mail.ua","Test Name","Test Surname","7777777777","password",Role.USER);
+        return userService.getUser(strToInt(id));
     }
 
     @PostMapping("/update")
@@ -84,6 +84,16 @@ public class UserController {
     @GetMapping("confirm/{code}")
     public void confirmEmail(@PathVariable String code) {
 
+    }
+
+    public static Integer strToInt(String str) {
+        int integer;
+        try {
+            integer = Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+        return integer;
     }
 
 }

@@ -44,7 +44,7 @@ public class PsychologistRepository {
         return psychologist;
     }
 
-    public Psychologist update(Psychologist psychologist) {
+    public List<Psychologist> update(Psychologist psychologist) {
         namedParameter.batchUpdate("UPDATE psychologist SET name=:name, surname=:surName, email=:email,password=:password,phone=:phone," +
                 "price=:price,location=:location.name,experience=:experience,rating=:rating,description=:description,photolink=:photoLink WHERE id=:id", SqlParameterSourceUtils.createBatch(psychologist));
         updateCategories(psychologist);
@@ -52,14 +52,10 @@ public class PsychologistRepository {
     }
 
 
-    public Psychologist get(Integer id) {
+    public List<Psychologist> get(Integer id) {
         List<Psychologist> psychologists = jdbcTemplate.query("SELECT * FROM psychologist WHERE id=?", ROW_MAPPER, id);
-        Psychologist psychologist = DataAccessUtils.singleResult(psychologists);
-        if (psychologist != null) {
-            psychologist.setCategoriesSet(getCategories(id));
-            return psychologist;
-        }
-        return null;
+        psychologists.forEach(psychologist -> psychologist.setCategoriesSet(getCategories(psychologist.getId())));
+        return psychologists;
     }
 
     public List<Psychologist> getAll() {

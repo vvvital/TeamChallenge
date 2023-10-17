@@ -8,6 +8,7 @@ import com.vvvital.teamchallenge.repository.jdbc.PsychologistRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -26,8 +27,8 @@ public class PsychologistService {
         return psychologistRepository.create(psychologist);
     }
 
-    public Psychologist update(Psychologist psychologist){
-        return psychologistRepository.update(psychologist);
+    public PsychologistToSend update(Psychologist psychologist){
+        return DataAccessUtils.singleResult(psychologistToSends(psychologistRepository.update(psychologist)));
     }
 
     public Psychologist login(String email, String password) {
@@ -59,8 +60,8 @@ public class PsychologistService {
         return psychologistToSends(psychologistList);
     }
 
-    public Psychologist get(Integer id) {
-        return psychologistRepository.get(id);
+    public PsychologistToSend get(Integer id) {
+        return DataAccessUtils.singleResult(psychologistToSends(psychologistRepository.get(id)));
     }
 
     public void delete(Integer id) {
