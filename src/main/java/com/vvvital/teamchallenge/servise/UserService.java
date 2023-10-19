@@ -27,38 +27,21 @@ public class UserService {
     public User create(User user) {
         logger.info("/************UserService/create User****************/");
         return jdbcUserRepository.create(user);
-//        String email = user.getEmail();
-//        String subject = "Підтвердження реестрації";
-//        String massage = "Для підтверження реестрації перейдіть за посиланням  localhost:8080/confirm?code="+EmailService.codeGenerator();
-//        emailService.sendMail(email,subject,massage);
     }
 
-    public User login(String login, String password) throws ExceptionUser {
-        User user = jdbcUserRepository.login(login);
-        if (user==null) {
-            throw new ExceptionUser("Такого юзера не існує");
-        }else {
-            if (user.getPassword().equals(password)) {
-                return user;
-            } else {
-                throw new ExceptionUser("Невірний логін або пароль");
-            }
-        }
-    }
-
-    public List<User> getUsers() {
-        logger.info("/************UserService/get Users****************/");
-        return jdbcUserRepository.getUsers();
-    }
-
-    public User getUser(Integer id) {
-        logger.info("/************UserService/get User Id****************/");
-        return jdbcUserRepository.getUser(id);
-    }
-
-    public void update(User user, Integer id) {
+    public void update(User user) {
         logger.info("/************UserService/update User id****************/");
-        jdbcUserRepository.update(user, id);
+        jdbcUserRepository.update(user);
+    }
+
+    public List<User> getAll() {
+        logger.info("/************UserService/get Users****************/");
+        return jdbcUserRepository.getAll();
+    }
+
+    public User get(Integer id) {
+        logger.info("/************UserService/get User Id****************/");
+        return jdbcUserRepository.get(id);
     }
 
     public void delete(Integer id) {

@@ -21,12 +21,7 @@ public class User {
     @NotBlank
     private String password;
     @Enumerated(EnumType.STRING)
-//    @CollectionTable(name = "user_roles",
-//            joinColumns = @JoinColumn (name = "user_id"),
-//            uniqueConstraints = @UniqueConstraint(name = "user_roles_idx", columnNames = {user_id,role}))
-
     private Role role;
-    private String user_id;
 
     public User(String mail, String name, String surname, String phone, String password, Role role) {
         this.email = mail;
@@ -34,8 +29,17 @@ public class User {
         this.surName = surname;
         this.phone = phone;
         this.password = password;
-        this.role = role;
     }
+
+    public User(Integer id, String mail, String name, String surname, String phone, String password) {
+        this.id = id;
+        this.email = mail;
+        this.name = name;
+        this.surName = surname;
+        this.phone = phone;
+        this.password = password;
+    }
+
 
     public User() {
     }

@@ -3,7 +3,6 @@ package com.vvvital.teamchallenge.web;
 import com.vvvital.teamchallenge.entity.Categories;
 import com.vvvital.teamchallenge.entity.Role;
 import com.vvvital.teamchallenge.entity.User;
-import com.vvvital.teamchallenge.servise.ExceptionUser;
 import com.vvvital.teamchallenge.servise.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,37 +41,30 @@ public class UserController {
         return userService.create(user);
     }
 
-    @PostMapping("/login")
-    public User login(@RequestParam(required = true) String email,
-                      @RequestParam(required = true) String password) {
-        System.out.println("Email = " + email + " Password = " + password);
-        User user=null;
-        try {
-           user = userService.login(email, password);
-        }catch (ExceptionUser e){
-            user=new User();
-            user.setName("Email or password is wrong");
-        }
-        return user;
+    @PostMapping("/update")
+    public User update(
+            @RequestParam(required = true) String id,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String surName,
+            @RequestParam(required = false) String phone,
+            @RequestParam(required = false) String password
+    ){
+        User user=new User(strToInt(id),email,name,surName,phone,password);
+        userService.update(user);
+        return null;
     }
 
     @GetMapping("/getAll")
-    public List<User> getUsers() {
+    public List<User> getAll() {
         logger.info("*******Controller/getUsers*******");
-        return userService.getUsers();
+        return userService.getAll();
     }
 
     @GetMapping("/get")
     public User getUser(@RequestParam String id) {
         logger.info("*******Controller/getUser id= {}*******", id);
-        //return userService.getUser(Integer.parseInt(id));
-        return userService.getUser(strToInt(id));
-    }
-
-    @PostMapping("/update")
-    public void update(User user, String id) {
-        logger.info("*******Controller/updateUser*******");
-        userService.update(user, Integer.parseInt(id));
+        return userService.get(strToInt(id));
     }
 
     @GetMapping("/delete")
@@ -81,10 +73,6 @@ public class UserController {
         userService.delete(Integer.parseInt(id));
     }
 
-    @GetMapping("confirm/{code}")
-    public void confirmEmail(@PathVariable String code) {
-
-    }
 
     public static Integer strToInt(String str) {
         int integer;

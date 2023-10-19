@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class JdbcUserRepository implements com.vvvital.teamchallenge.repository.UserRepository {
+public class JdbcUserRepository {
 
     private final Logger logger = LoggerFactory.getLogger(JdbcUserRepository.class);
 
@@ -38,30 +38,27 @@ public class JdbcUserRepository implements com.vvvital.teamchallenge.repository.
         Number keyNew = insertUser.executeAndReturnKey(parameterSource);
         Integer id = keyNew.intValue();
         user.setId(id);
-        return getUser(id);
+        return get(id);
     }
 
-    public User login(String email) {
-        List<User> users = jdbcTemplate.query("SELECT * FROM users WHERE email=?", ROW_MAPPER, email);
-        return DataAccessUtils.singleResult(users);
+    public void update(User user) {
+        logger.info("*************User Repository/update Users id***********");
+        jdbcTemplate.update("insert into users values (?,?,?,?,?,?)",
+                user.getId(), user.getName(), user.getName(), user.getEmail(), user.getPhone());
     }
 
-    public List<User> getUsers() {
-        logger.info("*************User Repository/get Users***********");
+    public List<User> getAll() {
+    //    logger.info("*************User Repository/get Users***********");
         return jdbcTemplate.query("SELECT * FROM users ORDER BY id", ROW_MAPPER);
     }
 
-    public User getUser(Integer id) {
+    public User get(Integer id) {
         logger.info("*************User Repository/get User id***********");
         List<User> users = jdbcTemplate.query("SELECT * FROM users WHERE id=?", ROW_MAPPER, id);
         return DataAccessUtils.singleResult(users);
     }
 
-    public void update(User user, Integer id) {
-        logger.info("*************User Repository/update Users id***********");
-        jdbcTemplate.update("insert into users values (?,?,?,?,?)",
-                id, user.getName(), user.getName(), user.getEmail(), user.getPhone());
-    }
+
 
     public void delete(Integer id) {
         logger.info("*************User Repository/delete Users id" + "***********");

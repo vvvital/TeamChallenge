@@ -99,7 +99,8 @@ public class PsychologistController {
         Set<Categories> categoriesSet = new HashSet<>();
         if (categories != null) {
             categoriesSet = Arrays.stream(categories).map(Categories::valueOf).collect(Collectors.toSet());
-        } else if (location != null) {
+        }
+        if (location != null) {
             location1 = Location.valueOf(location);
             logger.info("**************location = {}",location);
         }

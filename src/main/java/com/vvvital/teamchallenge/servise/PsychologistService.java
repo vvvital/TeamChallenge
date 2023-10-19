@@ -83,6 +83,7 @@ public class PsychologistService {
     }
 
     public List<Psychologist> selectByLocation(Location location, List<Psychologist> psychologists) {
+        logger.info("************* select by location {}",location);
         List<Psychologist> psychologistList = new ArrayList<>();
         if (location != null) {
             for (Psychologist p : psychologists
