@@ -62,6 +62,7 @@ public class PsychologistController {
 
     @PostMapping("/update")
     public PsychologistToSend update(
+            @RequestParam String id,
             @RequestParam String name,
             @RequestParam String surNane,
             @RequestParam String email,
@@ -77,6 +78,7 @@ public class PsychologistController {
     ) {
         Psychologist psychologist = new Psychologist(name, surNane, email, password, phone,
                 strToInt(price), Location.valueOf(location), strToBool(online), strToBool(offline), strToInt(experience), description, photoLink, Categories.ORGANIZATIONAL_PSYCHOLOGIST);
+        psychologist.setId(strToInt(id));
         System.out.println(psychologist);
         return psychologistService.update(psychologist);
     }
