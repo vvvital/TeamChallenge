@@ -43,8 +43,8 @@ public class JdbcUserRepository {
 
     public void update(User user) {
         logger.info("*************User Repository/update Users id***********");
-        jdbcTemplate.update("insert into users values (?,?,?,?,?,?)",
-                user.getId(), user.getName(), user.getName(), user.getEmail(), user.getPhone());
+        jdbcTemplate.update("update users set email=?,name=?,surName=?,phone=?,password=? where id=?",
+                user.getEmail(),user.getName(),user.getSurName(),user.getPhone(),user.getPassword(),user.getId());
     }
 
     public List<User> getAll() {

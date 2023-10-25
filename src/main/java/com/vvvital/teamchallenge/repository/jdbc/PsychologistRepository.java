@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class PsychologistRepository {
@@ -85,6 +86,14 @@ public class PsychologistRepository {
             );
         }
     }
+
+//    public Set<Integer>getPsychIdByCategories(Set<Categories>categoriesSet){
+//        Set<Integer>idSet=new HashSet<>();
+//        idSet=categoriesSet.stream()
+//                .map(categories -> jdbcTemplate.update("SELECT psychologist_id FROM psychologist_categories WHERE categories=?",categories.toString()))
+//                .collect(Collectors.toSet());
+//        return idSet;
+//    }
 
     public Set<Categories> getCategories(Integer id) {
         logger.info("*********getCategories************");

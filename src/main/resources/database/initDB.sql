@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS psychologist
     email       VARCHAR,
     password    VARCHAR,
     phone       VARCHAR,
-    price       VARCHAR,
+    price       INTEGER,
     location    VARCHAR,
     online      BOOLEAN,
     offline     BOOLEAN,
