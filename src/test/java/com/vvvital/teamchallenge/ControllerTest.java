@@ -54,7 +54,7 @@ public class ControllerTest {
     @Test
     public void update(){
         getAllWithoutParam();
-        controller.update("7","updName","updSurname","upd@mail.ua","11111","4444444444444"
+        controller.update("8","updName","updSurname","upd@mail.ua","11111","4444444444444"
         ,"111","LVIV","true","true","10","description","");
         getAllWithoutParam();
     }
@@ -62,7 +62,7 @@ public class ControllerTest {
     @Test
     public void delete(){
         getAllWithoutParam();
-        controller.delete("7");
+        controller.delete("8");
         getAllWithoutParam();
     }
 
